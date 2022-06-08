@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 @RequestMapping("/api/problems")
 @RestController
 public class ProblemController {
+
+    private final ProblemService problemService;
 
     @Operation(summary = "get problems", description = "문제들 가져오기")
     @ApiResponses({
@@ -33,16 +36,9 @@ public class ProblemController {
     })
     @GetMapping("/mypage")
     public ResponseEntity<ProblemDto.Response> getProblems(
-            @CookieValue(name = "user") String user,
             @RequestParam(value = "offset") int offset,
             @RequestParam(value = "limit") int limit
     ) {
-        System.out.println(user);
-        System.out.println(offset + " " + limit);
-
-        List<ProblemDto.Info> infos = new ArrayList<>();
-        infos.add(ProblemDto.Info.builder().platform(0).title("test0").problemNum(1).rank("G1").build());
-        infos.add(ProblemDto.Info.builder().platform(1).title("test1").problemNum(2).rank("G2").build());
-        return ResponseEntity.ok().body(ProblemDto.Response.builder().infos(infos).result(infos.size()).build());
+        return ResponseEntity.ok().body(problemService.getProblems(offset, limit));
     }
 }
