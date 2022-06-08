@@ -29,6 +29,9 @@ dependencies {
 	// database
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'com.h2database:h2'
+	// modelmapper
+	implementation 'org.modelmapper:modelmapper:3.0.0'
+
 }
 
 tasks.named('test') {
