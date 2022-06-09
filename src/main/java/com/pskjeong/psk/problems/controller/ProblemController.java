@@ -13,9 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RequiredArgsConstructor
 @RequestMapping("/api/problems")
 @RestController
@@ -34,7 +31,7 @@ public class ProblemController {
             @Parameter(name = "offset", description = "가져올 시작 위치", example = "0"),
             @Parameter(name = "limit", description = "가져올 개수", example = "12")
     })
-    @GetMapping("/mypage")
+    @GetMapping("")
     public ResponseEntity<ProblemDto.Response> getProblems(
             @RequestParam(value = "offset") int offset,
             @RequestParam(value = "limit") int limit
