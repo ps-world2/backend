@@ -78,7 +78,25 @@ public class BaekjoonApi extends ApiRequest{
         }
     }
     public List<Problems> baekjoonRequest() {
-        JSONObject response = (JSONObject) request(targetURL);
-        return toEntity(response);
+        List<Problems> result = new ArrayList<>();
+        /**
+         * query를 100개씩 불러오기 때문에 100개씩 요청
+         */
+        int page = 1;
+        JSONObject response;
+        while (true) {
+            response = (JSONObject) request(targetURL + "&page=" + page++);
+
+            System.out.println(page);
+            System.out.println(response);
+
+            List<Problems> resEntity = toEntity(response);
+            System.out.println(resEntity.size());
+            result.addAll(resEntity);
+            if (resEntity.size() < 100) break;
+        }
+        System.out.println(response);
+        System.out.println(page);
+        return result;
     }
 }

@@ -18,6 +18,8 @@ public abstract class ApiRequest {
     abstract List<Problems> toEntity(JSONObject res) throws JSONException;
     public Object request(String targetURL) {
         try {
+            System.out.println(targetURL);
+            Thread.sleep(3000);
             URL url = new URL(targetURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
