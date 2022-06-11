@@ -38,3 +38,5 @@ out/
 
 ### security ###
 application-real.yml
+
+logs
