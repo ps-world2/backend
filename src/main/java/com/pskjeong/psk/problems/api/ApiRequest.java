@@ -1,6 +1,7 @@
 package com.pskjeong.psk.problems.api;
 
 import com.pskjeong.psk.problems.domain.Problems;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,12 +11,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+@Slf4j
 public abstract class ApiRequest {
     protected int baekjoon = 0;
-    abstract int getProblemNum(JSONObject res) throws JSONException;
-    abstract String getProblemTitle(JSONObject res) throws JSONException;
-    abstract String getProblemRank(JSONObject res) throws JSONException;
-    abstract List<Problems> toEntity(JSONObject res) throws JSONException;
+    abstract int getProblemNum(JSONObject res) throws Exception;
+    abstract String getProblemTitle(JSONObject res) throws Exception;
+    abstract String getProblemRank(JSONObject res) throws Exception;
+    abstract List<Problems> toEntity(JSONObject res) throws Exception;
     public Object request(String targetURL) {
         try {
             System.out.println(targetURL);
@@ -32,17 +34,19 @@ public abstract class ApiRequest {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 StringBuilder sb = new StringBuilder();
 
-                String line = "";
+                String line;
                 while ((line = br.readLine()) != null) {
                     sb.append(line);
                 }
-                JSONObject responseJson = new JSONObject(sb.toString());
-                return responseJson;
+
+                return new JSONObject(sb.toString());
             } else {
-                return "response error";
+                log.error("Request Error : {} request Status code {}", targetURL, responseCode);
+                return null;
             }
         } catch (Exception e) {
-            return "exception";
+            log.error("Request Error : {} request Exception Error", targetURL, e);
+            return null;
         }
     }
 }

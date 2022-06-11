@@ -13,3 +13,14 @@ spring:
   h2:
     console:
       enabled: true
+
+logging:
+  file:
+    path: C:\Users\jeong\IdeaProjects\psk\src\main\resources\logs\dev.log
+
+  level:
+    root: debug
+  logback:
+    rolling policy:
+      max-file-size: 100MB
+      max-history: 10
