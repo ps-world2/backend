@@ -38,5 +38,6 @@ out/
 
 ### security ###
 application-real.yml
+application-oauth.yml
 
 logs
