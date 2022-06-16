@@ -34,6 +34,8 @@ dependencies {
 	implementation 'org.modelmapper:modelmapper:3.0.0'
 	// json
 	implementation 'org.json:json:20090211'
+	// oauth
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 
 }
